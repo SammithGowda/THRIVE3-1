@@ -1,10 +1,11 @@
 import "./App.css";
+import { Main } from "./components/main";
 
 function App() {
   return (
-    <div className="App">
-      <h1>BIO APP</h1>
-    </div>
+    <>
+      <Main />
+    </>
   );
 }
 
