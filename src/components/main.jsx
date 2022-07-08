@@ -33,6 +33,15 @@ export const Main = () => {
       )
       .catch((er) => console.log(er, "im er"));
   };
+  const clearfun = (e) => {
+    if (e.key === "Backspace")
+      setData({
+        coord: { lat: "", lon: "" },
+        main: "",
+        sys: "",
+        timezone: "",
+      });
+  };
   return (
     <>
       <div className="maindiv">
@@ -43,6 +52,7 @@ export const Main = () => {
           <div className="location_input_div">
             <input
               onChange={(e) => setPlace(e.target.value)}
+              onKeyDown={(e) => clearfun(e)}
               type={"text"}
               placeholder="Enter Location"
             />
