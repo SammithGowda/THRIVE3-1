@@ -10,7 +10,7 @@
   border: 2px solid black;
   display: flex;
   width: 100%;
-  background-color: lightblue;
+  /* background-color: lightblue; */
   margin-top: 10px;
 }
 .location_icon_div,
@@ -43,4 +43,24 @@
   height: 95%;
   background-color: transparent;
   border: none;
+}
+.map_div {
+  /* border: 2px solid red; */
+  width: 90%;
+  height: 400px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.daily-details {
+  border: 2px solid red;
+  width: 90%;
+  height: 150px;
+  margin: auto;
+  display: flex;
+}
+.daily-details > div {
+  border: 2px solid red;
+  width: 50%;
+  padding-left: 20px;
 }
