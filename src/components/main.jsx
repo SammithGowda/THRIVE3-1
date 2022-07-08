@@ -16,7 +16,7 @@ export const Main = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [place]);
   const search = (event) => {
-    console.log(event.key);
+    // console.log(event.key);
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=ffad48f0f537175523e6baaf8924ef0f&&units=metric`
     )
@@ -48,7 +48,7 @@ export const Main = () => {
             />
           </div>
           <div className="location_search_button">
-            <button onClick={() => search()}>
+            <button>
               <ImSearch className="react_iCon" />
             </button>
           </div>
