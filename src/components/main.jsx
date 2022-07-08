@@ -33,7 +33,7 @@ export const Main = () => {
   }
 
   useEffect(() => {
-    console.log("useef 1");
+    // console.log("useef 1");
     if (navigator.geolocation) {
       navigator.permissions
         .query({ name: "geolocation" })
@@ -93,13 +93,19 @@ export const Main = () => {
     }
   };
   const dailyforcast = (userlocation) => {
-    axios
-      .get(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${userlocation.lat}&lon=${userlocation.lon}&exclude=hourly&appid=ffad48f0f537175523e6baaf8924ef0f&&units=metric`
-      )
-      .then((res) => setDailyforcastdata(res.data))
-      .catch((er) => console.log(er));
-    // console.log(userlocation, "userlocation");
+    const location = `https://api.openweathermap.org/data/2.5/onecall?lat=${userlocation.lat}&lon=${userlocation.lon}&exclude=hourly&appid=ffad48f0f537175523e6baaf8924ef0f&&units=metric`;
+    const lname = `https://us1.locationiq.com/v1/reverse.php?key=pk.094534d9e6252d151e352d9ad7a8ba56&lat=+
+    ${userlocation.lat} + &lon= +${userlocation.lon}+ &format=json`;
+
+    const reqone = axios.get(location);
+    const reqtwo = axios.get(lname);
+
+    axios.all([reqone, reqtwo]).then(
+      axios.spread((...res) => {
+        setDailyforcastdata(res[0].data);
+        setPlace(res[1].data.address.city);
+      })
+    );
   };
   return (
     <>
