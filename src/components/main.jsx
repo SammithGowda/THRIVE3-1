@@ -1,6 +1,7 @@
 import "../App.css";
 import { ImLocation, ImSearch } from "react-icons/im";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 export const Main = () => {
   const [place, setPlace] = useState("");
@@ -10,13 +11,60 @@ export const Main = () => {
     sys: "",
     timezone: "",
   });
+  // const [userlocation, setUserlocation] = useState();
+  const [dailyforcastdata, setDailyforcastdata] = useState([]);
+
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 10000,
+    maximumAge: 0,
+  };
+  function success(pos) {
+    const { latitude, longitude } = pos.coords;
+    const location = {
+      lat: latitude,
+      lon: longitude,
+    };
+    dailyforcast(location);
+  }
+
+  function errors(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  useEffect(() => {
+    console.log("useef 1");
+    if (navigator.geolocation) {
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then(function (result) {
+          if (result.state === "granted") {
+            console.log(result.state);
+            //If granted then you can directly call your function here
+            navigator.geolocation.getCurrentPosition(success);
+          } else if (result.state === "prompt") {
+            navigator.geolocation.getCurrentPosition(success, errors, options);
+          } else if (result.state === "denied") {
+            //If denied then you have to show instructions to enable location
+          }
+          result.onchange = function () {
+            console.log(result.state);
+          };
+        });
+    } else {
+      alert("Sorry Not available!");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     search();
-    // dailyforcast(data);
+    // dailyforcast(userlocation);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [place]);
   const search = (event) => {
     // console.log(event.key);
+    if (!place) return;
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=ffad48f0f537175523e6baaf8924ef0f&&units=metric`
     )
@@ -34,13 +82,24 @@ export const Main = () => {
       .catch((er) => console.log(er, "im er"));
   };
   const clearfun = (e) => {
-    if (e.key === "Backspace")
+    if (e.key === "Backspace") {
+      setDailyforcastdata([]);
       setData({
         coord: { lat: "", lon: "" },
         main: "",
         sys: "",
         timezone: "",
       });
+    }
+  };
+  const dailyforcast = (userlocation) => {
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${userlocation.lat}&lon=${userlocation.lon}&exclude=hourly&appid=ffad48f0f537175523e6baaf8924ef0f&&units=metric`
+      )
+      .then((res) => setDailyforcastdata(res.data))
+      .catch((er) => console.log(er));
+    // console.log(userlocation, "userlocation");
   };
   return (
     <>
@@ -64,8 +123,58 @@ export const Main = () => {
           </div>
         </div>
 
-        {data.main === "" ? (
+        <div className="daily-report-div">
+          {dailyforcastdata.length === 0 ? (
+            <div></div>
+          ) : (
+            dailyforcastdata.daily.map((el) => (
+              <div className="daily-tempdiv">
+                <img
+                  src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`}
+                  alt=""
+                />
+                <p>{`MAX ${el.temp.max}`} </p>
+                <p>{`MIN ${el.temp.min}`}</p>
+              </div>
+            ))
+          )}
+        </div>
+        {Object.keys(dailyforcastdata).length === 0 && data.main === "" ? (
           <div></div>
+        ) : Object.keys(dailyforcastdata).length !== 0 && data.main === "" ? (
+          <div className="daily-details">
+            <div>
+              <h1>{`${dailyforcastdata.current.temp}°C`}</h1>
+              <p>{`Pressure${dailyforcastdata.current.pressure}`}</p>
+            </div>
+            <div>
+              {" "}
+              <h1>{`${dailyforcastdata.current.humidity}% Humidity`}</h1>
+              <p>{`Sunrise${dailyforcastdata.current.sunrise}`}</p>
+              <p>{`Sunset${dailyforcastdata.current.sunset}`}</p>
+            </div>
+          </div>
+        ) : Object.keys(dailyforcastdata).length !== 0 && data.main !== "" ? (
+          <div className="daily-details">
+            <div>
+              <h1>{`${data.main.temp}°C`}</h1>
+              <p>{`Pressure${data.main.pressure}`}</p>
+            </div>
+            <div>
+              {" "}
+              <h1>{`${data.main.humidity}% Humidity`}</h1>
+              <p>{`Sunrise${data.sys.sunrise}`}</p>
+              <p>{`Sunset${data.sys.sunset}`}</p>
+            </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
+
+        {/* {data.main === "" ? (
+          <div>
+            {console.log(Object.keys(dailyforcastdata).length, data.main)}
+          </div>
         ) : (
           <div className="daily-details">
             <div>
@@ -79,7 +188,7 @@ export const Main = () => {
               <p>{`Sunset${data.sys.sunset}`}</p>
             </div>
           </div>
-        )}
+        )} */}
 
         <div className="map_div">
           {place ? (

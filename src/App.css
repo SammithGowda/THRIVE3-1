@@ -53,14 +53,27 @@
 }
 
 .daily-details {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   width: 90%;
   height: 150px;
   margin: auto;
   display: flex;
 }
 .daily-details > div {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   width: 50%;
   text-align: center;
+}
+
+.daily-report-div {
+  /* border: 2px solid red; */
+  width: 90%;
+  height: 150px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.daily-tempdiv {
+  /* border: 2px solid green; */
+  width: 100px;
 }
