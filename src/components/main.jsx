@@ -54,16 +54,28 @@ export const Main = () => {
     } else {
       alert("Sorry Not available!");
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     search();
-    // dailyforcast(userlocation);
+
+    // dailyforcast();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [place]);
+  const sumfunc = (params1, params2) => {
+    // console.log(params1, params2);
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${params1}&lon=${params2}&exclude=hourly&appid=ffad48f0f537175523e6baaf8924ef0f&&units=metric`
+      )
+      .then((res) => setDailyforcastdata(res.data))
+      .catch((er) => console.log(er));
+  };
   const search = (event) => {
     // console.log(event.key);
+
     if (!place) return;
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=ffad48f0f537175523e6baaf8924ef0f&&units=metric`
@@ -71,15 +83,17 @@ export const Main = () => {
       .then((res) => res.json())
       .then(
         (res) =>
-          setData({
-            coord: { lat: res.coord.lat, lon: res.coord.lon },
-            main: res.main,
-            sys: res.sys,
-            timezone: res.timezone,
-          })
+          setData(
+            {
+              coord: { lat: res.coord.lat, lon: res.coord.lon },
+              main: res.main,
+              sys: res.sys,
+              timezone: res.timezone,
+            },
+            sumfunc(res.coord.lat, res.coord.lon)
+          )
         // console.log(res)
-      )
-      .catch((er) => console.log(er, "im er"));
+      );
   };
   const clearfun = (e) => {
     if (e.key === "Backspace") {
@@ -176,25 +190,6 @@ export const Main = () => {
         ) : (
           <div></div>
         )}
-
-        {/* {data.main === "" ? (
-          <div>
-            {console.log(Object.keys(dailyforcastdata).length, data.main)}
-          </div>
-        ) : (
-          <div className="daily-details">
-            <div>
-              <h1>{`${data.main.temp}°C`}</h1>
-              <p>{`Pressure${data.main.pressure}`}</p>
-            </div>
-            <div>
-              {" "}
-              <h1>{`${data.main.humidity}% Humidity`}</h1>
-              <p>{`Sunrise${data.sys.sunrise}`}</p>
-              <p>{`Sunset${data.sys.sunset}`}</p>
-            </div>
-          </div>
-        )} */}
 
         <div className="map_div">
           {place ? (

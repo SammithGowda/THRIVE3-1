@@ -77,3 +77,36 @@
   /* border: 2px solid green; */
   width: 100px;
 }
+@media only screen and (min-width: 0px) and (max-width: 376px) {
+  .maindiv {
+    border: 2px solid yellow;
+    width: 100%;
+    margin: auto;
+    background: wheat;
+    margin-top: 0px;
+  }
+  .location_input_div {
+    width: 80%;
+  }
+
+  .react_iCon {
+    padding: 10%;
+    margin-top: 10px;
+    font-size: 3ch;
+    color: black;
+    /* border: 2px solid red; */
+  }
+
+  .daily-report-div {
+    /* border: 2px solid red; */
+    width: 90%;
+    height: 150px;
+    margin: auto;
+    display: block;
+    overflow: scroll;
+  }
+  .map_div {
+    /* border: 2px solid red; */
+    margin-top: 50px;
+  }
+}
