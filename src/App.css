@@ -58,13 +58,21 @@
   height: 150px;
   margin: auto;
   display: flex;
+  margin-top: 10px;
 }
 .daily-details > div {
   /* border: 2px solid red; */
   width: 50%;
   text-align: center;
 }
-
+.daily-details > div > p:nth-child(1) {
+  font-size: 150%;
+  font-weight: bold;
+}
+.only_p {
+  font-weight: bold;
+  font-size: small;
+}
 .daily-report-div {
   /* border: 2px solid red; */
   width: 90%;
@@ -80,9 +88,9 @@
   text-align: center;
 }
 .daily-tempdiv > span {
-  margin: 5px;
-  font-size: small;
+  font-size: 90%;
   font-weight: bold;
+  border: 2px solid transparent;
 }
 @media only screen and (min-width: 0px) and (max-width: 376px) {
   .maindiv {
@@ -124,5 +132,14 @@
     /* border: 2px solid blueviolet; */
     font-size: 65%;
     font-weight: bolder;
+  }
+
+  .daily-details > div > p:nth-child(1) {
+    font-size: 100%;
+    font-weight: bold;
+  }
+  .only_p {
+    font-weight: bold;
+    font-size: smaller;
   }
 }

@@ -2,7 +2,7 @@ import "../App.css";
 import { ImLocation, ImSearch } from "react-icons/im";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import moment from "moment";
 export const Main = () => {
   const [place, setPlace] = useState("");
   const [data, setData] = useState({
@@ -122,38 +122,32 @@ export const Main = () => {
     );
   };
   const displaydate = (d) => {
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
+    // const months = [
+    //   "January",
+    //   "February",
+    //   "March",
+    //   "April",
+    //   "May",
+    //   "June",
+    //   "July",
+    //   "August",
+    //   "September",
+    //   "October",
+    //   "November",
+    //   "December",
+    // ];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
     const day = days[d.getDay()];
-    const month = months[d.getMonth()];
-    const date = d.getDate();
-    const year = d.getFullYear();
+    // const month = months[d.getMonth()];
+    // const date = d.getDate();
+    // const year = d.getFullYear();
 
-    return `${date} ${month} ${year} ${day}`;
+    return ` ${day}`;
   };
-  console.log(dailyforcastdata);
+  console.log(dailyforcastdata, "1");
+  console.log(data, "2");
+
   return (
     <>
       <div className="maindiv">
@@ -216,14 +210,18 @@ export const Main = () => {
         ) : Object.keys(dailyforcastdata).length !== 0 && data.main !== "" ? (
           <div className="daily-details">
             <div>
-              <h1>{`${data.main.temp}°C`}</h1>
-              <p>{`Pressure ${data.main.pressure}`}</p>
+              <p>{`Temp ${data.main.temp}°C`}</p>
+              <p className="only_p">{`Pressure ${data.main.pressure}`}</p>
             </div>
             <div>
-              {" "}
-              <h1>{`${data.main.humidity}% Humidity`}</h1>
-              <p>{`Sunrise ${data.sys.sunrise}`}</p>
-              <p>{`Sunset ${data.sys.sunset}`}</p>
+              <p>{`${data.main.humidity}% Humidity`}</p>
+
+              <p className="only_p">{`Sunrise ${moment
+                .unix(data.sys.sunrise)
+                .format("hh:mm:ss")}`}</p>
+              <p className="only_p">{`Sunset ${moment
+                .unix(data.sys.sunset)
+                .format("hh:mm:ss")}`}</p>
             </div>
           </div>
         ) : (
