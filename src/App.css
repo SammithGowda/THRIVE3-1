@@ -7,7 +7,7 @@
 }
 .searchBar {
   height: 50px;
-  border: 2px solid black;
+  border: 1px solid black;
   display: flex;
   width: 100%;
   /* background-color: lightblue; */
@@ -68,21 +68,28 @@
 .daily-report-div {
   /* border: 2px solid red; */
   width: 90%;
-  height: 150px;
+  /* height: 150px; */
   margin: auto;
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
 }
 .daily-tempdiv {
   /* border: 2px solid green; */
   width: 100px;
+  text-align: center;
+}
+.daily-tempdiv > span {
+  margin: 5px;
+  font-size: small;
+  font-weight: bold;
 }
 @media only screen and (min-width: 0px) and (max-width: 376px) {
   .maindiv {
-    border: 2px solid yellow;
+    /* border: 2px solid yellow; */
     width: 100%;
     margin: auto;
-    background: wheat;
+    /* background: wheat; */
     margin-top: 0px;
   }
   .location_input_div {
@@ -100,13 +107,22 @@
   .daily-report-div {
     /* border: 2px solid red; */
     width: 90%;
-    height: 150px;
+    /* height: 200px; */
     margin: auto;
-    display: block;
+    margin-top: 10px;
     overflow: scroll;
+    direction: rtl;
   }
   .map_div {
     /* border: 2px solid red; */
     margin-top: 50px;
+  }
+  .daily-tempdiv {
+    text-align: center;
+  }
+  .daily-tempdiv > span {
+    /* border: 2px solid blueviolet; */
+    font-size: small;
+    font-weight: bold;
   }
 }

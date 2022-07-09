@@ -153,8 +153,10 @@ export const Main = () => {
                   src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`}
                   alt=""
                 />
-                <p>{`MAX ${el.temp.max}`} </p>
-                <p>{`MIN ${el.temp.min}`}</p>
+                <br />
+                <span>{`MAX ${el.temp.max}`} </span>
+                <br />
+                <span>{`MIN ${el.temp.min}`}</span>
               </div>
             ))
           )}
@@ -165,26 +167,26 @@ export const Main = () => {
           <div className="daily-details">
             <div>
               <h1>{`${dailyforcastdata.current.temp}°C`}</h1>
-              <p>{`Pressure${dailyforcastdata.current.pressure}`}</p>
+              <p>{`Pressure ${dailyforcastdata.current.pressure}`}</p>
             </div>
             <div>
               {" "}
               <h1>{`${dailyforcastdata.current.humidity}% Humidity`}</h1>
-              <p>{`Sunrise${dailyforcastdata.current.sunrise}`}</p>
-              <p>{`Sunset${dailyforcastdata.current.sunset}`}</p>
+              <p>{`Sunrise ${dailyforcastdata.current.sunrise}`}</p>
+              <p>{`Sunset ${dailyforcastdata.current.sunset}`}</p>
             </div>
           </div>
         ) : Object.keys(dailyforcastdata).length !== 0 && data.main !== "" ? (
           <div className="daily-details">
             <div>
               <h1>{`${data.main.temp}°C`}</h1>
-              <p>{`Pressure${data.main.pressure}`}</p>
+              <p>{`Pressure ${data.main.pressure}`}</p>
             </div>
             <div>
               {" "}
               <h1>{`${data.main.humidity}% Humidity`}</h1>
-              <p>{`Sunrise${data.sys.sunrise}`}</p>
-              <p>{`Sunset${data.sys.sunset}`}</p>
+              <p>{`Sunrise ${data.sys.sunrise}`}</p>
+              <p>{`Sunset ${data.sys.sunset}`}</p>
             </div>
           </div>
         ) : (
@@ -202,14 +204,7 @@ export const Main = () => {
               loading="lazy"
             ></iframe>
           ) : (
-            <div>
-              {/* <img
-                src="/rain-umbrella.gif"
-                alt="gif"
-                width={"50%"}
-                style={{ marginTop: "50px" }}
-              /> */}
-            </div>
+            <div></div>
           )}
         </div>
       </div>
