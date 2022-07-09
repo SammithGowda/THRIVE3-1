@@ -185,9 +185,9 @@ export const Main = () => {
                   alt=""
                 />
                 <br />
-                <span>{`MaxTemp ${el.temp.max}`} </span>
+                <span>{`MaxTemp ${el.temp.max}°c`} </span>
                 <br />
-                <span>{`MinTemp ${el.temp.min}`}</span>
+                <span>{`MinTemp ${el.temp.min}°c`}</span>
               </div>
             ))
           )}
@@ -218,10 +218,10 @@ export const Main = () => {
 
               <p className="only_p">{`Sunrise ${moment
                 .unix(data.sys.sunrise)
-                .format("hh:mm:ss")}`}</p>
+                .format("hh:mm")} AM`}</p>
               <p className="only_p">{`Sunset ${moment
                 .unix(data.sys.sunset)
-                .format("hh:mm:ss")}`}</p>
+                .format("hh:mm")} PM`}</p>
             </div>
           </div>
         ) : (
