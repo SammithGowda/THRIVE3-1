@@ -121,6 +121,39 @@ export const Main = () => {
       })
     );
   };
+  const displaydate = (d) => {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+    const day = days[d.getDay()];
+    const month = months[d.getMonth()];
+    const date = d.getDate();
+    const year = d.getFullYear();
+
+    return `${date} ${month} ${year} ${day}`;
+  };
+  console.log(dailyforcastdata);
   return (
     <>
       <div className="maindiv">
@@ -149,6 +182,10 @@ export const Main = () => {
           ) : (
             dailyforcastdata.daily.map((el) => (
               <div className="daily-tempdiv">
+                <span>
+                  {displaydate(new Date(el.dt * 1000 - data.timezone * 1000))}
+                </span>
+                <br />
                 <img
                   src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`}
                   alt=""
