@@ -111,7 +111,7 @@
     margin: auto;
     margin-top: 10px;
     overflow: scroll;
-    direction: rtl;
+    direction: ltr;
   }
   .map_div {
     /* border: 2px solid red; */

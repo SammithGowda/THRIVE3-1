@@ -191,9 +191,9 @@ export const Main = () => {
                   alt=""
                 />
                 <br />
-                <span>{`MAX ${el.temp.max}`} </span>
+                <span>{`MaxTemp ${el.temp.max}`} </span>
                 <br />
-                <span>{`MIN ${el.temp.min}`}</span>
+                <span>{`MinTemp ${el.temp.min}`}</span>
               </div>
             ))
           )}
