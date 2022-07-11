@@ -1,10 +1,10 @@
 import "./App.css";
-import { Main } from "./components/main";
+import { Debou } from "./components/db";
 
 function App() {
   return (
     <>
-      <Main />
+      <Debou />
     </>
   );
 }

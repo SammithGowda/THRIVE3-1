@@ -3,7 +3,9 @@ import { ImLocation, ImSearch } from "react-icons/im";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
-export const Main = () => {
+export const Main = ({ prop, wrt }) => {
+  // console.log(prop);
+  const [debouncedata, setDebouncedata] = useState([]);
   const [place, setPlace] = useState("");
   const [data, setData] = useState({
     coord: { lat: "", lon: "" },
@@ -39,7 +41,7 @@ export const Main = () => {
         .query({ name: "geolocation" })
         .then(function (result) {
           if (result.state === "granted") {
-            console.log(result.state);
+            // console.log(result.state);
             //If granted then you can directly call your function here
             navigator.geolocation.getCurrentPosition(success);
           } else if (result.state === "prompt") {
@@ -60,10 +62,14 @@ export const Main = () => {
 
   useEffect(() => {
     search();
+    // debounce();
 
     // dailyforcast();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [place]);
+  const debounce = (e) => {
+    setDebouncedata(wrt(e.target.value));
+  };
   const sumfunc = (params1, params2) => {
     // console.log(params1, params2);
     axios
@@ -98,6 +104,8 @@ export const Main = () => {
   const clearfun = (e) => {
     if (e.key === "Backspace") {
       setDailyforcastdata([]);
+      setDebouncedata([]);
+      setPlace("");
       setData({
         coord: { lat: "", lon: "" },
         main: "",
@@ -150,6 +158,7 @@ export const Main = () => {
 
   return (
     <>
+      {console.log(debouncedata, "db")}
       <div className="maindiv">
         <div className="searchBar">
           <div className="location_icon_div">
@@ -157,7 +166,7 @@ export const Main = () => {
           </div>
           <div className="location_input_div">
             <input
-              onChange={(e) => setPlace(e.target.value)}
+              onChange={(e) => debounce(e)}
               onKeyDown={(e) => clearfun(e)}
               type={"text"}
               placeholder="Enter Location"
@@ -168,6 +177,22 @@ export const Main = () => {
               <ImSearch className="react_iCon" />
             </button>
           </div>
+        </div>
+        <div>
+          {debouncedata.map((el) => (
+            <div
+              onClick={() => {
+                const location = {
+                  lat: el.lat,
+                  lon: el.lon,
+                };
+                dailyforcast(location);
+                setDebouncedata([]);
+              }}
+            >
+              <p>{el.name}</p>
+            </div>
+          ))}
         </div>
 
         <div className="daily-report-div">
