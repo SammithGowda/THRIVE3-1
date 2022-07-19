@@ -3,6 +3,7 @@ import { ImLocation, ImSearch } from "react-icons/im";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
+
 export const Main = ({ prop, wrt }) => {
   // console.log(prop);
   const [debouncedata, setDebouncedata] = useState([]);
@@ -116,7 +117,7 @@ export const Main = ({ prop, wrt }) => {
   };
   const dailyforcast = (userlocation) => {
     const location = `https://api.openweathermap.org/data/2.5/onecall?lat=${userlocation.lat}&lon=${userlocation.lon}&exclude=hourly&appid=ffad48f0f537175523e6baaf8924ef0f&&units=metric`;
-    const lname = `https://us1.locationiq.com/v1/reverse.php?key=pk.2f2d141b328ac8a95d73d0598e145313&lat=+
+    const lname = `https://us1.locationiq.com/v1/reverse.php?key=${process.env.REACT_APP_LOC_IQ}&lat=+
     ${userlocation.lat} + &lon= +${userlocation.lon}+ &format=json`;
 
     const reqone = axios.get(location);
@@ -257,7 +258,7 @@ export const Main = ({ prop, wrt }) => {
           {place ? (
             <iframe
               title="my unique app"
-              src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyA0ttYe6gb0q-spi6rdZY0PRxr9Pi8nRRE&q=${place}`}
+              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAP_KEY}&q=${place}`}
               width="100%"
               height="100%"
               style={{ border: 0 }}

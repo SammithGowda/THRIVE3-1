@@ -17,9 +17,11 @@
 .env.development.local
 .env.test.local
 .env.production.local
-
+.env
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Local Netlify folder
+G_API=ffad48f0f537175523e6baaf8924ef0f
+LOCATION_QAPI=pk.2f2d141b328ac8a95d73d0598e145313
+
