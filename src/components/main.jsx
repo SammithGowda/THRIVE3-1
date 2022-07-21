@@ -115,11 +115,11 @@ export const Main = ({ prop, wrt }) => {
       });
     }
   };
-  console.log(
-    process.env.REACT_APP_MAP_KEY,
-    process.env.REACT_APP_LOC_IQ,
-    "key"
-  );
+  // console.log(
+  //   process.env.REACT_APP_MAP_KEY,
+  //   process.env.REACT_APP_LOC_IQ,
+  //   "key"
+  // );
   const dailyforcast = (userlocation) => {
     const location = `https://api.openweathermap.org/data/2.5/onecall?lat=${userlocation.lat}&lon=${userlocation.lon}&exclude=hourly&appid=ffad48f0f537175523e6baaf8924ef0f&&units=metric`;
     const lname = `https://us1.locationiq.com/v1/reverse.php?key=pk.7497edc9d5ae0431a950c309611a88e3&lat=+
@@ -263,7 +263,7 @@ export const Main = ({ prop, wrt }) => {
           {place ? (
             <iframe
               title="my unique app"
-              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAP_KEY}&q=${place}`}
+              src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyA0ttYe6gb0q-spi6rdZY0PRxr9Pi8nRRE&q=${place}`}
               width="100%"
               height="100%"
               style={{ border: 0 }}
