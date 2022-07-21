@@ -265,7 +265,7 @@ export const Main = ({ prop, wrt }) => {
               loading="lazy"
             ></iframe>
           ) : (
-            <div></div>
+            <div> </div>
           )}
         </div>
       </div>
