@@ -143,3 +143,20 @@
     font-size: smaller;
   }
 }
+.debounce_div {
+  /* border: 2px solid red; */
+  height: 50px;
+  width: 80%;
+  position: relative;
+  left: 10%;
+  margin-top: 3px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 1px solid #d6d7db;
+
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.debounce_div > span {
+  display: inline-block;
+  padding: 10px 0px 0px 10px;
+}

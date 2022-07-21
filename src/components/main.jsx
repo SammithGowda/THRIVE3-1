@@ -164,7 +164,6 @@ export const Main = ({ prop, wrt }) => {
 
   return (
     <>
-      {console.log(debouncedata, "db")}
       <div className="maindiv">
         <div className="searchBar">
           <div className="location_icon_div">
@@ -186,18 +185,22 @@ export const Main = ({ prop, wrt }) => {
         </div>
         <div>
           {debouncedata.map((el) => (
-            <div
-              onClick={() => {
-                const location = {
-                  lat: el.lat,
-                  lon: el.lon,
-                };
-                dailyforcast(location);
-                setDebouncedata([]);
-              }}
-            >
-              <p>{el.name}</p>
-            </div>
+            <>
+              <div
+                className="debounce_div"
+                onClick={() => {
+                  const location = {
+                    lat: el.lat,
+                    lon: el.lon,
+                  };
+                  dailyforcast(location);
+                  setDebouncedata([]);
+                }}
+              >
+                <span>{el.name}</span>,<span>{el.state}</span>
+                {/* <hr /> */}
+              </div>
+            </>
           ))}
         </div>
 
