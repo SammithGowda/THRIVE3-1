@@ -117,7 +117,7 @@ export const Main = ({ prop, wrt }) => {
   };
   const dailyforcast = (userlocation) => {
     const location = `https://api.openweathermap.org/data/2.5/onecall?lat=${userlocation.lat}&lon=${userlocation.lon}&exclude=hourly&appid=ffad48f0f537175523e6baaf8924ef0f&&units=metric`;
-    const lname = `https://us1.locationiq.com/v1/reverse.php?key=${process.env.REACT_APP_LOC_IQ}&lat=+
+    const lname = `https://us1.locationiq.com/v1/reverse.php?key=pk.7497edc9d5ae0431a950c309611a88e3&lat=+
     ${userlocation.lat} + &lon= +${userlocation.lon}+ &format=json`;
 
     const reqone = axios.get(location);
